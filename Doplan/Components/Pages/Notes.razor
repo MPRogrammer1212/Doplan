@@ -1,0 +1,63 @@
+﻿@page "/notes"
+@using Doplan.Model
+@using Repository
+@inject IRepositories repository
+
+<div class="notes-container">
+    <button class="toggle-btn" @onclick="ToggleAddNote">
+        @(ShowAddSection ? "Hide Add Program Section" : "Add Program Section")
+        <span class="arrow-icon">@(ShowAddSection ? "▲" : "▼")</span>
+    </button>
+
+    @if (ShowAddSection)
+    {
+        <div class="note-form-card">
+            <h3>Add Note</h3>
+            <EditForm Model="newNote" OnValidSubmit="AddNote">
+                <div class="input-group">
+                    <label>Title</label>
+                    <input placeholder="A short title..." @bind="newNote.Title" />
+                </div>
+                <div class="input-group">
+                    <label>Description</label>
+                    <textarea placeholder="Write description..." @bind="newNote.Description"></textarea>
+                </div>
+                <div class="input-group">
+                </div>
+                <button type="submit" class="btn-submit">Submit Note</button>
+            </EditForm>
+        </div>
+    }
+
+    <div class="notes-list">
+        <h3>Notes</h3>
+        @if (notes == null || !notes.Any())
+        {
+            <p class="empty-notes">There is no note yet</p>
+        }
+        else
+        {
+            @foreach (var note in notes)
+            {
+                <div class="note-card">
+                    <div class="note-content">
+                        <p class="note-title">@note.Title</p>
+                        <p class="note-description">@note.Description</p>
+                    </div>
+                    <button type="button" class="btn-delete" @onclick="() => DeleteNote(note.Id)">Delete</button>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+
+@code {
+    private bool ShowAddSection = false;
+
+    void ToggleAddNote()
+    {
+        ShowAddSection = !ShowAddSection;
+    }
+
+}

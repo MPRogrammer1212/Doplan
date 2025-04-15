@@ -1,0 +1,426 @@
+﻿.container {
+    font-family: Arial, sans-serif;
+    padding: 1vw;
+}
+
+/* Toggle Button */
+.toggle-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #371353;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Show/Hide Tasks Button */
+.toggle-tasks-btn {
+    background: linear-gradient(180deg, #2A3A5B 0%, #354A7D 70%);
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+    .toggle-tasks-btn:hover {
+        background: linear-gradient(180deg, #354A7D 0%, #2A3A5B 70%);
+    }
+
+/* Add Program Section */
+.add-program {
+    background-color: #e1d9ff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+}
+
+/* Input Groups */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+}
+
+    .input-group label {
+        font-weight: bold;
+    }
+
+    .input-group input {
+        padding: 6px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+/* Date Group */
+.date-group {
+    display: flex;
+    gap: 10px;
+}
+
+    .date-group input {
+        flex: 1;
+    }
+
+/* Task Buttons */
+.task-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.task-btn {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.add-task {
+    background: linear-gradient(180deg, #5B2A9D 0%, #3A0647 70%);
+}
+
+.add-task-btn {
+    background: linear-gradient(180deg, #5B2A9D 0%, #3A0647 70%);
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.remove-task {
+    background: linear-gradient(180deg, #9B2C2C 0%, #5A1A1A 70%);
+}
+
+/* Task Input Section */
+.task-input {
+    margin-top: 6px;
+}
+
+.task-box {
+    background: white;
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 4px;
+}
+
+/* Show Tasks Button */
+.show-tasks-btn {
+    background: linear-gradient(180deg, #2A3A5B 0%, #354A7D 70%);
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+    .show-tasks-btn:hover {
+        background: linear-gradient(180deg, #354A7D 0%, #2A3A5B 70%);
+    }
+
+/* Programs List */
+.program-list {
+    margin-top: 12px;
+}
+
+.program-card {
+    background: #d9e2ff;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    min-width: 93%;
+    width: fit-content;
+}
+
+/* Program Header */
+.program-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+
+/* Program Title */
+.program-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+}
+
+/* Program Dates */
+.program-dates {
+    color: black;
+    font-size: 14px;
+}
+
+/* Task Table */
+.task-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+}
+
+    .task-table th, .task-table td {
+        border: 1px solid #000c59;
+        padding: 6px;
+        text-align: left;
+        color: black;
+        font-size: 12px; /* Adjusted for Android */
+    }
+
+    .task-table th {
+        background-color: #9caaff;
+        color: black;
+    }
+
+        .task-table th:nth-child(2),
+        .task-table td:nth-child(2) {
+            text-align: center;
+            width: 8%;
+            padding: 1px;
+        }
+
+        .task-table th:nth-child(3) {
+            padding: 2px;
+        }
+
+    .task-table td:nth-child(3) {
+        text-align: center;
+        width: 8%;
+        padding: 0;
+    }
+
+.circle-btn {
+    background-color: transparent;
+    border-color: red;
+    padding: 2px 4px;
+    border-radius: 50px;
+    background: linear-gradient(180deg, #7D2A2A 0%, #A33333 70%);
+    color: white;
+}
+
+    .circle-btn:hover {
+        background: linear-gradient(180deg, #A33333 0%, #7D2A2A 70%);
+    }
+
+/* Empty Message */
+.empty-message {
+    font-style: italic;
+    color: gray;
+    margin-top: 8px;
+}
+
+/* No Tasks Message */
+.no-tasks {
+    font-style: italic;
+    color: lightgray;
+}
+
+/* Delete Button */
+.delete-btn {
+    background: linear-gradient(180deg, #7D2A2A 0%, #A33333 70%);
+    color: white;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+    .delete-btn:hover {
+        background: linear-gradient(180deg, #A33333 0%, #7D2A2A 70%);
+    }
+
+/* Button Row (Show Tasks & Delete) */
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+/* Icon Styling */
+.delete-btn i, .show-tasks-btn i {
+    font-size: 14px;
+}
+
+/* Circular Checkbox */
+.circle-checkbox {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid darkblue;
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
+    transition: 0.15s;
+}
+
+    .circle-checkbox:checked {
+        background-color: #8c52ff;
+        border-color: #5B2A9D;
+    }
+
+        .circle-checkbox:checked::after {
+            content: "✔";
+            font-size: 12px;
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #5B2A9D;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Submit Button */
+.submit-button {
+    padding: 10px;
+    background-color: #5B2A9D;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+
+
+/*filter page specifics
+*/
+
+/* Toggle switch */
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    border-radius: 25px; /* 50% smaller */
+    padding: 0.15rem; /* 50% smaller */
+    cursor: pointer;
+    width: 50px; /* 50% smaller */
+    justify-content: space-between;
+    max-width: 50px; /* 50% smaller */
+}
+
+.toggle-circle {
+    width: 20px; /* 50% smaller */
+    height: 20px; /* 50% smaller */
+    background-color: #ccc;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s ease;
+}
+
+    .toggle-circle.on {
+        background-color: #4caf50;
+        transform: translateX(25px); /* 50% smaller */
+    }
+
+    .toggle-circle.off {
+        background-color: #f44336;
+        transform: translateX(0);
+    }
+
+.form-control {
+    padding: 0.2rem;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom:11px;
+}
+
+.input-group-row {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 8px;
+    gap: 10vw;
+}
+
+.input-group-f {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* This will align items vertically */
+    gap: 10px; /* Adjust the gap to a smaller, consistent value */
+    margin-bottom: 8px;
+}
+
+.add-program-f {
+    background-color: #e1d9ff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.image{
+    width:60%;
+    border:2px solid blue;
+}
+
+/*about app page specifics*/
+.about-creator {
+    margin-top: 2rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    background: linear-gradient(180deg, rgb(10, 44, 112) 0%, #400c5e 100%);
+    color: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+    .about-creator a {
+        color: #99cfff;
+        text-decoration: none;
+    }
+
+        .about-creator a:hover {
+            text-decoration: underline;
+        }
+
+    .about-creator h2 {
+        margin-bottom: 0.5rem;
+    }
+
+.icon {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    margin-right: 5px;
+}

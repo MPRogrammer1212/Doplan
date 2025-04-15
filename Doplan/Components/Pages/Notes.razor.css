@@ -1,0 +1,132 @@
+﻿.notes-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.toggle-btn {
+    background: linear-gradient(180deg, rgb(10, 50, 120) 0%, #4a0757 70%);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 300px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+    .toggle-btn:hover {
+        background: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+        transform: scale(1.05);
+    }
+
+.arrow-icon {
+    font-size: 16px;
+}
+
+
+.note-form-card, .notes-list {
+    background: linear-gradient(180deg, rgb(10, 50, 120) 0%, #4a0757 70%);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+    .input-group label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .input-group input, .input-group textarea {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+textarea {
+    resize: none;
+    height: 80px;
+}
+
+.btn-submit {
+    background: #ff9800;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.notes-list {
+    margin-top: 15px;
+}
+
+    .notes-list h3 {
+        margin-bottom: 10px;
+    }
+
+.empty-notes {
+    font-style: italic;
+    color: #bbb;
+}
+
+.note-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.note-title {
+    font-size: 20px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.note-description {
+    font-size: 14px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.btn-delete {
+    background: #ff4d4d;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+}

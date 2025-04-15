@@ -1,0 +1,168 @@
+﻿@page "/weeklyTerm"
+@using Doplan.Model
+@using Repository
+@inject IRepositories repository
+
+<link rel="stylesheet" href="css/termsPages.css" />
+
+<div class="container">
+    <button class="toggle-btn" @onclick="ToggleAddProgram">
+        @(showAddProgram ? "Hide Add Program Section" : "Add Program Section")
+        <span class="arrow-icon">@(showAddProgram ? "▲" : "▼")</span>
+    </button>
+
+    @if (showAddProgram)
+    {
+        <div class="add-program">
+            <h3>Add Weekly Program</h3>
+            <EditForm Model="newTerm" OnValidSubmit="AddTerm">
+                <div class="input-group">
+                    <label>Title</label>
+                    <input type="text" placeholder="A short title..." @bind="newTerm.Title" />
+                </div>
+
+                <div class="input-group">
+                    <label>Start date and End date</label>
+                    <div class="date-group">
+                        <input type="date" placeholder="Start date..." @bind="newTerm.StartDate" />
+                        <input type="date" placeholder="End date..." @bind="newTerm.EndDate" />
+                    </div>
+                </div>
+
+                <label>Add Task Section</label>
+                <div class="task-controls">
+                    <button type="button" class="task-btn add-task" @onclick="AddInput">
+                        ➕ Add Task
+                    </button>
+                    <button type="button" class="task-btn remove-task" @onclick="RemoveInput" disabled="@(taskInputs.Count == 0)">
+                        ➖ Remove Task
+                    </button>
+                </div>
+
+                @foreach (var task in taskInputs)
+                {
+                    <div class="task-input">
+                        <div class="task-box">
+                            <div class="input-group">
+                                <label>Description</label>
+                                <input type="text" placeholder="Description..." @bind="task.Description" />
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <button type="submit" class="submit-btn">Submit Program</button>
+            </EditForm>
+        </div>
+    }
+
+    <h4>Weekly Programs List</h4>
+
+    @if (Terms == null || !Terms.Any())
+    {
+        <p class="empty-message">There is no long-term program yet</p>
+    }
+    else
+    {
+        <div class="program-list">
+            @foreach (var term in Terms)
+            {
+                <div class="program-card">
+                    <div class="program-header">
+                        <span class="program-title">@term.Title</span>
+                        <span class="program-dates">
+                            @(term.StartDate?.ToString("yyyy/MM/dd") ?? "(undefined start date)") to
+                            @(term.EndDate?.ToString("yyyy/MM/dd") ?? "(undefined end date)")
+                        </span>
+                        <input type="checkbox" class="circle-checkbox" checked="@term.IsEnd"
+                               @onclick="async () => await ToggleTermCompletion(term)" />
+                    </div>
+
+                    <div class="button-row">
+                        <button class="show-tasks-btn" @onclick="() => ToggleTaskVisibility(term.Id)">
+                            <i class="fas fa-eye"></i> Show Tasks
+                        </button>
+                        <button class="add-task-btn" @onclick="ToggleAddTask">
+                            @(showAddTask ? "Hide Add part" : "Add Task")
+                            <span class="arrow-icon">@(showAddTask ? "▲" : "▼")</span>
+                        </button>
+                        <button class="delete-btn" @onclick="() => DeleteTerm(term.Id)">
+                            <i class="fas fa-trash"></i> Delete Program
+                        </button>
+                    </div>
+
+                    @if (showAddTask)
+                    {
+                        <div class="task-input">
+                            <div class="task-box">
+                                <div class="input-group">
+                                    <label>Description</label>
+                                    <input type="text" placeholder="Description..." @bind="newTask.Description" />
+                                </div>
+                                <button type="button" class="submit-button" @onclick="() => AddTask(term.Id)">Submit task</button>
+                            </div>
+                        </div>
+                    }
+
+                    @if (VisibleTaskIds.Contains(term.Id))
+                    {
+                        <table class="task-table">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Completion</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var task in term.Tasks)
+                                {
+                                    <tr>
+                                        <td>@task.Description</td>
+                                        <td>
+                                            <input type="checkbox" class="circle-checkbox" checked="@task.IsEnd"
+                                                   @onclick="async () => await ToggleTaskCompletion(task)" />
+                                        </td>
+                                        <td>
+                                            <button class="circle-btn" @onclick="() => DeleteTask(task.Id)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+                                                </svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            }
+        </div>
+    }
+</div>
+
+
+@code {
+
+    private bool showAddProgram = false;
+    private bool showAddTask = false;
+    private HashSet<int> VisibleTaskIds = new();
+
+    void ToggleAddProgram()
+    {
+        showAddProgram = !showAddProgram;
+    }
+
+    void ToggleAddTask()
+    {
+        showAddTask = !showAddTask;
+    }
+
+    void ToggleTaskVisibility(int termId)
+    {
+        if (VisibleTaskIds.Contains(termId))
+            VisibleTaskIds.Remove(termId);
+        else
+            VisibleTaskIds.Add(termId);
+    }
+}

@@ -1,0 +1,164 @@
+﻿@page "/"
+@using Doplan.Model
+@using Repository
+@inject IRepositories repository
+@inject NavigationManager NavigationManager
+
+<link rel="stylesheet" href="css/termsPages.css" />
+
+<button class="submit-button" @onclick="NavigateToPage">About app and how to use it</button>
+<div class="add-program-f">
+    <div>
+        <label>Filter by term:</label>
+        <select class="form-control" @bind="SelectedTerm">
+            <option value="">-- All Term --</option>
+            @foreach (var term in Enum.GetValues<TermEnum>())
+            {
+                <option value="@term">@term.ToString()</option>
+            }
+        </select>
+    </div>
+
+    <div>
+        <label>Filter by completion:</label>
+
+        <select class="form-control" @bind="Completion">
+            <option value="all">All</option>
+            <option value="uncompleted">Only uncompleted</option>
+            <option value="completed">Only completed</option>
+        </select>
+    </div>
+
+    <div class="input-group-row">
+        <div class="input-group">
+            <label>Start date filter</label>
+            <input placeholder="Start Date..." type="date" @bind="StartDateFilter" @bind:event="oninput" />
+        </div>
+        <div class="input-group">
+            <label>End date filter</label>
+            <input placeholder="End Date..." type="date" @bind="EndDateFilter" @bind:event="oninput" />
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label>Search by title</label>
+        <input type="text" @bind="SearchTerm" @bind:event="oninput"
+        placeholder="Search ..." />
+    </div>
+
+    <div class="input-group-f">
+        <label>Show oldest first</label>
+        <button class="toggle-switch" @onclick="ToggleState">
+            <div class="toggle-circle @(isOn ? "on" : "off")">
+                @(isOn ? "On" : "Off")
+            </div>
+        </button>
+    </div>
+
+
+</div>
+@*-------------------*@
+@if (filteredTerms == null || !filteredTerms.Any())
+{
+    <p class="empty-message">
+        @(Terms == null || !Terms.Any() ? "There is no program yet" : "There is no program that matches your filter")
+    </p>
+}
+else
+{
+    foreach (var term in filteredTerms)
+    {
+        <div class="program-card">
+            <div class="program-header">
+                <span class="program-title">@term.Title</span>
+                <span class="program-dates">
+                    @(term.StartDate?.ToString("yyyy/MM/dd") ?? "(undefined start date)") to
+                    @(term.EndDate?.ToString("yyyy/MM/dd") ?? "(undefined end date)")
+                </span>
+                <input type="checkbox" class="circle-checkbox" checked="@term.IsEnd"
+                @onclick="async () => await ToggleTermCompletion(term)" />
+            </div>
+
+            <div class="button-row">
+                <button class="show-tasks-btn" @onclick="() => ToggleTaskVisibility(term.Id)">
+                    <i class="fas fa-eye"></i> Show Tasks
+                </button>
+                <button class="add-task-btn" @onclick="ToggleAddTask">
+                    @(showAddTask ? "Hide Add Task" : "Add Task")
+                    <span class="arrow-icon">@(showAddTask ? "▲" : "▼")</span>
+                </button>
+                <button class="delete-btn" @onclick="() => DeleteTerm(term.Id)">
+                    <i class="fas fa-trash"></i> Delete Program
+                </button>
+            </div>
+
+            @if (showAddTask)
+            {
+                <div class="task-input">
+                    <div class="task-box">
+                        <div class="input-group">
+                            <label>Description</label>
+                            <input type="text" placeholder="Description..." @bind="newTask.Description" />
+                        </div>
+                        <button type="button" class="submit-button" @onclick="() => AddTask(term.Id)">Submit Task</button>
+                    </div>
+                </div>
+            }
+
+            @if (VisibleTaskIds.Contains(term.Id))
+            {
+                <table class="task-table">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Completion</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var task in term.Tasks)
+                        {
+                            <tr>
+                                <td>@task.Description</td>
+                                <td>
+                                    <input type="checkbox" class="circle-checkbox" checked="@task.IsEnd"
+                                    @onclick="async () => await ToggleTaskCompletion(task)" />
+                                </td>
+                                <td>
+                                    <button class="circle-btn" @onclick="() => DeleteTask(task.Id)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    }
+}
+
+@code {
+
+    private void NavigateToPage()
+    {
+        NavigationManager.NavigateTo("/about");
+    }
+
+    private bool showAddProgram = false;
+    private bool showAddTask = false;
+    private HashSet<int> VisibleTaskIds = new();
+
+    void ToggleAddProgram() => showAddProgram = !showAddProgram;
+    void ToggleAddTask() => showAddTask = !showAddTask;
+
+    void ToggleTaskVisibility(int termId)
+    {
+        if (VisibleTaskIds.Contains(termId))
+            VisibleTaskIds.Remove(termId);
+        else
+            VisibleTaskIds.Add(termId);
+    }
+}
