@@ -9,7 +9,7 @@
 <button class="submit-button" @onclick="NavigateToPage">About app and how to use it</button>
 <div class="add-program-f">
     <div>
-        <label>Filter by term:</label>
+        <label>Filter bay term:</label>
         <select class="form-control" @bind="SelectedTerm">
             <option value="">-- All Term --</option>
             @foreach (var term in Enum.GetValues<TermEnum>())

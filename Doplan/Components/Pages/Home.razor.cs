@@ -137,12 +137,16 @@ public partial class Home
         }
         await repository.DeleteTerm(id);
         await LoadData();
+        await SearchProgram();
+        newTask = new TaskModel();
     }
 
     private async Task DeleteTask(int id)
     {
         await repository.DeleteTask(id);
         await LoadData();
+        await SearchProgram();
+        newTask = new TaskModel();
     }
 
     private async Task ToggleTaskCompletion(TaskModel task)
