@@ -88,8 +88,8 @@ public partial class Home
         (!SelectedTerm.HasValue || t.Term == SelectedTerm) &&
         (!StartDateFilter.HasValue || t.StartDate.HasValue && t.StartDate.Value.Date >= StartDateFilter.Value.Date) &&
         (!EndDateFilter.HasValue || t.EndDate.HasValue && t.EndDate.Value.Date <= EndDateFilter.Value.Date) &&
-        (completion == "all" || 
-        (completion == "uncompleted" && t.IsEnd == false) || 
+        (completion == "all" ||
+        (completion == "uncompleted" && t.IsEnd == false) ||
         (completion == "completed" && t.IsEnd == true))
         ).ToList();
     }
@@ -123,6 +123,7 @@ public partial class Home
         newTask.TermId = termId;
         await repository.AddTask(newTask);
         await LoadData();
+        await SearchProgram();
         newTask = new TaskModel();
     }
 
