@@ -11,7 +11,7 @@ Doplan is an app for managing your programs and tasks and making plans!
 ## About page in app
 there is a about page in the app that explain what is app and how to use it. you can install now and check it
 
-## These are some images of application environment
+## Some images of application environment
 | Home Page | Menu | Notes | Programs Page | Filters |
 |:---:|:---:|:---:|:---:|:---:|
 | <img src="Doplan/wwwroot/images/1.jpg" width="200"/> | <img src="Doplan/wwwroot/images/1-2.jpg" width="200"/> | <img src="Doplan/wwwroot/images/2.jpg" width="200"/> | <img src="Doplan/wwwroot/images/6.jpg" width="200"/> | <img src="Doplan/wwwroot/images/7.jpg" width="200"/> |
