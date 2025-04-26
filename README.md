@@ -13,7 +13,8 @@ there is a about page in the app that explain what is app and how to use it. you
 
 ## these are some images of the application environment
 
-<img src="Doplan/wwwroot/images/1.jpg" width="300" />
+<img src="Doplan/wwwroot/images/1.jpg" width="200" style="display:inline-block;"/>
+<img src="Doplan/wwwroot/images/1-2.jpg" width="200" style="display:inline-block;"/>
 
 
 ## ⬇️Try it on android
