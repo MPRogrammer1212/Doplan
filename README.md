@@ -13,6 +13,8 @@ there is a about page in the app that explain what is app and how to use it. you
 
 ## these are some images of the application environment
 
+<img src="Doplan/wwwroot/images/1.jpg" width="300" />
+
 
 ## ⬇️Try it on android
 [⬇️ Download APK](https://github.com/MPRogrammer1212/Doplan/releases/download/v1.0.1/Doplan.apk)
